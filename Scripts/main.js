@@ -15,8 +15,6 @@ $(document).ready(function () {
         minWidth: minWidth
     });
     var theGame = new Game();
-
-    
 });
 
 function debug(text) {

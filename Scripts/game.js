@@ -13,6 +13,7 @@ var frameInterval = null;
 var pause = false;
 var enemies = [];
 var enemiesTimeFrame = [];
+var gameSpeed = 100;
 
 function Game() {
     enemies = [];
@@ -35,7 +36,7 @@ function Game() {
 
     //this.enemies = new Enemies(lane);
 
-    frameInterval = window.setInterval(function () { drawFrame(true) }, 100);
+    frameInterval = window.setInterval(function () { drawFrame(true) }, gameSpeed);
     //this.drawFrame();
 
     $("#btnStop").click(function () {
@@ -45,6 +46,7 @@ function Game() {
             pause = true;
     });
 
+    // Draw 20 enemies
     for (var i = 0; i < 20; i++) {
         var frame = 0;
         if (enemiesTimeFrame.length == 0) {
@@ -73,15 +75,10 @@ function Game() {
             }
         }
 
-        //Inamicii se
-
-
-        //    lane = "right";
-
        enemiesTimeFrame.push({
             frame: frame,
             lane: lane
-        });
+       });
     }
 
     $.each(enemiesTimeFrame, function (index, value) {
@@ -131,13 +128,9 @@ function addOpponent() {
         if (line == 23)
             enemies.splice(i, 1);
     }
-    //var opponent = new Opponent(frameCount, "left");
-    //var opponent = new Opponent(frameCount - 10, "right");
-    //var opponent = new Opponent(frameCount - 20, "left");
 }
 
 function addEnemyToCollection(lane) {
-    
 
     enemies.push({
         id: 0,
@@ -176,6 +169,8 @@ function keyPressed(e) {
 
 function updateScreen(countFrame) {
     clearScreen();
+    $("#roadstep").html("Frame count: " + frameCount);
+    $("#carPos").html("Car pos: " + userCarPosition);
 
     for (var i = 0; i < bits.length; i++) {
         var line = $("<li></li>");
@@ -190,14 +185,23 @@ function updateScreen(countFrame) {
         $("#screen").append(line);
     }
 
+    // Collision detection
+    var carCenter = 3;
+    if(userCarPosition === 'right') carCenter = 6;
+    if(
+        (bits[17][carCenter] === true || bits[18][carCenter] === true || bits[19][carCenter] === true) ||
+        (bits[15][carCenter] === true && bits[16][carCenter] === 1)
+    ){
+        $("#colision").html("colision: true");
+        pause = true;
+    }
+
     if (countFrame)
         frameCount++;
     if (frameCount == 20000000)
         clearInterval(frameInterval);
 
     clearMatrix();
-
-    $("#roadstep").html("Frame count: " + frameCount);
 }
 
 function clearScreen() {
@@ -212,28 +216,6 @@ function clearMatrix() {
 }
 
 Game.prototype.configureInitialBits = function () {
-    //bits = [
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1],
-    //    [1, 0, 0, 0, 0, 0, 0, 0, 0, 1]
-    //];
     bits = [
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -258,5 +240,4 @@ Game.prototype.configureInitialBits = function () {
     ];
 }
 Game.prototype.drawFrame = function () {
-
 }
