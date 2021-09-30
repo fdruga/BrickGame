@@ -177,7 +177,15 @@ function updateScreen(countFrame) {
     $("#screen").append(line);
   }
 
-  // Collision detection
+  this.collisionDetection();
+
+  if (countFrame) frameCount++;
+  if (frameCount == 20000000) clearInterval(frameInterval);
+
+  clearMatrix();
+}
+
+function collisionDetection() {
   var carCenter = 3;
   if (userCarPosition === "right") carCenter = 6;
   if (
@@ -189,11 +197,6 @@ function updateScreen(countFrame) {
     $("#colision").html("colision: true");
     pause = true;
   }
-
-  if (countFrame) frameCount++;
-  if (frameCount == 20000000) clearInterval(frameInterval);
-
-  clearMatrix();
 }
 
 function clearScreen() {
