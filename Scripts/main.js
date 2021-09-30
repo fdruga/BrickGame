@@ -5,18 +5,18 @@
 var debugContainer = null;
 
 $(document).ready(function () {
-    debugContainer = $("#debug");
+  debugContainer = $("#debug");
 
-    var minHeight = parseInt($(document).height()) - 35;
-    var minWidth = 180;
-    $("#screenContainer").resizable({
-        aspectRatio: .55,
-        maxHeight: minHeight,
-        minWidth: minWidth
-    });
-    var theGame = new Game();
+  var minHeight = parseInt($(document).height()) - 35;
+  var minWidth = 180;
+  $("#screenContainer").resizable({
+    aspectRatio: 0.55,
+    maxHeight: minHeight,
+    minWidth: minWidth,
+  });
+  var theGame = new Game();
 });
 
 function debug(text) {
-    $(debugContainer).append("<p>" + text + "</p>");
-};
+  $(debugContainer).append("<p>" + text + "</p>");
+}

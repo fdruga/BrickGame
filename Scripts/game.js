@@ -16,228 +16,219 @@ var enemiesTimeFrame = [];
 var gameSpeed = 100;
 
 function Game() {
-    enemies = [];
-    enemiesTimeFrame = [];
-    $(document).keydown(function (e) {
-        keyPressed(e);
-    });
-    userCarPosition = "right";
-    screen = $("#screen");
-    clearScreen();
-    this.configureInitialBits();
+  enemies = [];
+  enemiesTimeFrame = [];
+  $(document).keydown(function (e) {
+    keyPressed(e);
+  });
+  userCarPosition = "right";
+  screen = $("#screen");
+  clearScreen();
+  this.configureInitialBits();
 
-    var ran_bool = !!Math.round(Math.random() * 1);
-    var lane = "";
-    if (!ran_bool) {
-        lane = 'left';
-    } else {
-        lane = 'right';
+  var ran_bool = !!Math.round(Math.random() * 1);
+  var lane = "";
+  if (!ran_bool) {
+    lane = "left";
+  } else {
+    lane = "right";
+  }
+
+  //this.enemies = new Enemies(lane);
+
+  frameInterval = window.setInterval(function () {
+    drawFrame(true);
+  }, gameSpeed);
+  //this.drawFrame();
+
+  $("#btnStop").click(function () {
+    if (pause) pause = false;
+    else pause = true;
+  });
+
+  // Draw 20 enemies
+  for (var i = 0; i < 20; i++) {
+    var frame = 0;
+    if (enemiesTimeFrame.length == 0) {
+      enemiesTimeFrame.push({
+        frame: 0,
+        lane: "left",
+      });
+      continue;
     }
 
-    //this.enemies = new Enemies(lane);
+    var lastTimeFrame = enemiesTimeFrame[i - 1].frame;
+    var lastFrameLane = enemiesTimeFrame[i - 1].lane;
+    var minFrame = lastTimeFrame + 5;
+    var maxFrame = lastTimeFrame + 18;
 
-    frameInterval = window.setInterval(function () { drawFrame(true) }, gameSpeed);
-    //this.drawFrame();
+    var frame = getRandomInt(minFrame, maxFrame);
+    var lane = "left";
+    if (getRandomInt(0, 1) == 0) lane = "right";
 
-    $("#btnStop").click(function () {
-        if (pause)
-            pause = false;
-        else
-            pause = true;
-    });
-
-    // Draw 20 enemies
-    for (var i = 0; i < 20; i++) {
-        var frame = 0;
-        if (enemiesTimeFrame.length == 0) {
-            enemiesTimeFrame.push({
-                frame: 0,
-                lane: "left"
-            });
-            continue;
-        }
-
-        var lastTimeFrame = enemiesTimeFrame[i - 1].frame;
-        var lastFrameLane = enemiesTimeFrame[i - 1].lane;
-        var minFrame = lastTimeFrame + 5;
-        var maxFrame = lastTimeFrame + 18;
-
-        var frame = getRandomInt(minFrame, maxFrame);
-        var lane = "left";
-        if (getRandomInt(0, 1) == 0)
-            lane = "right";
-
-        //Jucatorul nu are loc sa treaca de inamici?
-        if ((frame - lastTimeFrame) < 8) {
-            if (lastFrameLane != lane) {
-                var diff = 10 - (frame - lastTimeFrame);
-                frame = frame + diff;
-            }
-        }
-
-       enemiesTimeFrame.push({
-            frame: frame,
-            lane: lane
-       });
+    //Jucatorul nu are loc sa treaca de inamici?
+    if (frame - lastTimeFrame < 8) {
+      if (lastFrameLane != lane) {
+        var diff = 10 - (frame - lastTimeFrame);
+        frame = frame + diff;
+      }
     }
 
-    $.each(enemiesTimeFrame, function (index, value) {
-        $("#enemyFrames").append("<table>");
-        $("#enemyFrames").append("<tr><td>" + value.frame + "</td><td>" + value.lane + " </td></tr>");
-        $("#enemyFrames").append("</table>");
+    enemiesTimeFrame.push({
+      frame: frame,
+      lane: lane,
     });
+  }
 
-    var salut = "asda";
+  $.each(enemiesTimeFrame, function (index, value) {
+    $("#enemyFrames").append("<table>");
+    $("#enemyFrames").append(
+      "<tr><td>" + value.frame + "</td><td>" + value.lane + " </td></tr>"
+    );
+    $("#enemyFrames").append("</table>");
+  });
+
+  var salut = "asda";
 }
 
-
-
 function drawFrame(andRoad) {
-    if (andRoad)
-        drawRoad();
-    var userCar = new Car(0, userCarPosition, true);
-    addOpponent();
+  if (andRoad) drawRoad();
+  var userCar = new Car(0, userCarPosition, true);
+  addOpponent();
 
-    if (pause == false)
-        updateScreen(true);
+  if (pause == false) updateScreen(true);
 
-    //debug("roadStep - " + roadStep);
+  //debug("roadStep - " + roadStep);
 }
 
 function addOpponent() {
-    var match1 = { frame: frameCount, lane: "left" };
-    var match2 = { frame: frameCount, lane: "right" };
-    var i;
-    for (i in enemiesTimeFrame) {
-        if (enemiesTimeFrame[i].frame == frameCount) {
-            var lane = enemiesTimeFrame[i].lane;
-            addEnemyToCollection(lane);
-        }
+  var match1 = { frame: frameCount, lane: "left" };
+  var match2 = { frame: frameCount, lane: "right" };
+  var i;
+  for (i in enemiesTimeFrame) {
+    if (enemiesTimeFrame[i].frame == frameCount) {
+      var lane = enemiesTimeFrame[i].lane;
+      addEnemyToCollection(lane);
     }
-    
+  }
 
-    for (var i = 0; i < enemies.length; i++) {
-        var id = enemies[i]["id"];
-        var line = enemies[i].carLine;
-        var lane = enemies[i].lane;
+  for (var i = 0; i < enemies.length; i++) {
+    var id = enemies[i]["id"];
+    var line = enemies[i].carLine;
+    var lane = enemies[i].lane;
 
-        var opponent = new Opponent(line, lane);
+    var opponent = new Opponent(line, lane);
 
-        enemies[i].carLine = line + 1;
+    enemies[i].carLine = line + 1;
 
-        if (line == 23)
-            enemies.splice(i, 1);
-    }
+    if (line == 23) enemies.splice(i, 1);
+  }
 }
 
 function addEnemyToCollection(lane) {
-
-    enemies.push({
-        id: 0,
-        carLine: 0,
-        lane: lane
-    });
+  enemies.push({
+    id: 0,
+    carLine: 0,
+    lane: lane,
+  });
 }
 
 function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function drawRoad() {
-    //alert("ya");
-    if (roadStep == 3)
-        roadStep = 0;
-    roadStep = roadStep + 1;
-    drawRoadStep(roadStep);
+  //alert("ya");
+  if (roadStep == 3) roadStep = 0;
+  roadStep = roadStep + 1;
+  drawRoadStep(roadStep);
 }
 function drawRoadStep(roadStep, line) {
-    bits = getRoadStep(roadStep);
+  bits = getRoadStep(roadStep);
 }
 
 function keyPressed(e) {
-    if (e.keyCode == 37) {
-        userCarPosition = "left";
-        updateScreen(false);
-        return false;
-    }
-    if (e.keyCode == 39) {
-        userCarPosition = "right";
-        updateScreen(false);
-        return false;
-    }
+  if (e.keyCode == 37) {
+    userCarPosition = "left";
+    updateScreen(false);
+    return false;
+  }
+  if (e.keyCode == 39) {
+    userCarPosition = "right";
+    updateScreen(false);
+    return false;
+  }
 }
 
 function updateScreen(countFrame) {
-    clearScreen();
-    $("#roadstep").html("Frame count: " + frameCount);
-    $("#carPos").html("Car pos: " + userCarPosition);
+  clearScreen();
+  $("#roadstep").html("Frame count: " + frameCount);
+  $("#carPos").html("Car pos: " + userCarPosition);
 
-    for (var i = 0; i < bits.length; i++) {
-        var line = $("<li></li>");
-        for (var n = 0; n < bits[i].length; n++) {
-            var isActive = false;
-            if (bits[i][n] == 1)
-                isActive = true;
-            var bit = Bit(isActive);
-            $(line).append(bit);
-        }
-
-        $("#screen").append(line);
+  for (var i = 0; i < bits.length; i++) {
+    var line = $("<li></li>");
+    for (var n = 0; n < bits[i].length; n++) {
+      var isActive = false;
+      if (bits[i][n] == 1) isActive = true;
+      var bit = Bit(isActive);
+      $(line).append(bit);
     }
 
-    // Collision detection
-    var carCenter = 3;
-    if(userCarPosition === 'right') carCenter = 6;
-    if(
-        (bits[17][carCenter] === true || bits[18][carCenter] === true || bits[19][carCenter] === true) ||
-        (bits[15][carCenter] === true && bits[16][carCenter] === 1)
-    ){
-        $("#colision").html("colision: true");
-        pause = true;
-    }
+    $("#screen").append(line);
+  }
 
-    if (countFrame)
-        frameCount++;
-    if (frameCount == 20000000)
-        clearInterval(frameInterval);
+  // Collision detection
+  var carCenter = 3;
+  if (userCarPosition === "right") carCenter = 6;
+  if (
+    bits[17][carCenter] === true ||
+    bits[18][carCenter] === true ||
+    bits[19][carCenter] === true ||
+    (bits[15][carCenter] === true && bits[16][carCenter] === 1)
+  ) {
+    $("#colision").html("colision: true");
+    pause = true;
+  }
 
-    clearMatrix();
+  if (countFrame) frameCount++;
+  if (frameCount == 20000000) clearInterval(frameInterval);
+
+  clearMatrix();
 }
 
 function clearScreen() {
-    $(screen).empty();
+  $(screen).empty();
 }
 function clearMatrix() {
-    for (i = 0; i < 20; i++) {
-        for (x = 1; x < 9; x++) {
-            bits[i][x] = 0;
-        }
+  for (i = 0; i < 20; i++) {
+    for (x = 1; x < 9; x++) {
+      bits[i][x] = 0;
     }
+  }
 }
 
 Game.prototype.configureInitialBits = function () {
-    bits = [
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    ];
-}
-Game.prototype.drawFrame = function () {
-}
+  bits = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  ];
+};
+Game.prototype.drawFrame = function () {};
