@@ -102,8 +102,6 @@ function drawFrame(andRoad) {
 }
 
 function addOpponent() {
-  var match1 = { frame: frameCount, lane: "left" };
-  var match2 = { frame: frameCount, lane: "right" };
   var i;
   for (i in enemiesTimeFrame) {
     if (enemiesTimeFrame[i].frame == frameCount) {
@@ -113,15 +111,23 @@ function addOpponent() {
   }
 
   for (var i = 0; i < enemies.length; i++) {
-    var id = enemies[i]["id"];
+    if (enemies[i].carLine == 23) {
+      enemies.splice(i, 1);
+    }
+  }
+
+  for (var i = 0; i < enemies.length; i++) {
     var line = enemies[i].carLine;
     var lane = enemies[i].lane;
 
-    var opponent = new Opponent(line, lane);
-
-    enemies[i].carLine = line + 1;
-
-    if (line == 23) enemies.splice(i, 1);
+    // Check if the enemy is outside of the screen
+    // and remove it if so. Else add it to the screen
+    if (enemies[i].carLine == 23) {
+      enemies.splice(i, 1);
+    } else {
+      new Opponent(line, lane);
+      enemies[i].carLine = line + 1;
+    }
   }
 }
 
