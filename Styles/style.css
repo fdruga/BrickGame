@@ -1,118 +1,152 @@
-﻿html, #mainContainer
-{
-    height: 100%;
+﻿html,
+#mainContainer {
+  height: 100%;
 }
 body {
-    background-color: #e8e8e8;
-    height: 100%;
+  background-color: #e8e8e8;
+  height: 100%;
 }
-#screenContainer
-{
-    text-align:center;
-    height: 100%;
-    margin: 10px;
-    width: 200px;
-    height: 350px;
-    margin: 0 auto;
-    position: relative;
+#screenContainer {
+  text-align: center;
+  height: 100%;
+  margin: 10px;
+  width: 200px;
+  height: 350px;
+  margin: 0 auto;
+  position: relative;
 }
-#screen
-{
-    background-color: #b1bfb0;
-    border: solid 2px #5e665f;
-    display:inline-block;
-    margin:4px;
-    margin: 0 auto;
-    width: 100%;
-    height: 100%;
+#screen {
+  background-color: #b1bfb0;
+  border: solid 2px #5e665f;
+  display: inline-block;
+  margin: 4px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
 }
-#screen li
-{
-    list-style:none;
-    width: 100%;
-    height: 4.34%;
-    margin-bottom:1.2%;
+#screen li {
+  list-style: none;
+  width: 100%;
+  height: 4.34%;
+  margin-bottom: 1.2%;
 }
-#screen ul
-{
-    height: 100%;
+#screen ul {
+  height: 100%;
 }
-#screen div
-{
-    display:inline-block;
-    width: 9%;
-    
-    
-    height: 100%;
-    margin-right: 2px;
-    background: no-repeat url('../Images/bitOff.png') center center;
-    background-size: 100% 100%;
+#screen div {
+  display: inline-block;
+  width: 9%;
+
+  height: 100%;
+  margin-right: 2px;
+  background: no-repeat url("../Images/bitOff.png") center center;
+  background-size: 100% 100%;
 }
 
-#screen div.bitActive
-{
-    background: no-repeat url('../Images/bit.png') center center;
-    background-size: 100% 100%;
+#screen div.bitActive {
+  background: no-repeat url("../Images/bit.png") center center;
+  background-size: 100% 100%;
 }
 
-#screen div:last-child
-{
-    margin-right: 0px;
+#screen div:last-child {
+  margin-right: 0px;
 }
 
-#buttonContainer
-{
-    text-align: center;
+#buttonContainer {
+  text-align: center;
 }
 
 .ui-resizable-e {
-cursor: e-resize;
-width: 3px;
-right: -7px;
-top: 1px;
-height: 100%;
+  cursor: e-resize;
+  width: 3px;
+  right: -7px;
+  top: 1px;
+  height: 100%;
 }
 .ui-resizable-handle {
-position: absolute;
-font-size: 0.1px;
-display: block;
+  position: absolute;
+  font-size: 0.1px;
+  display: block;
 }
 .ui-resizable-s {
-cursor: s-resize;
-height: 3px;
-width: 100%;
-bottom: -7px;
-left: 0;
+  cursor: s-resize;
+  height: 3px;
+  width: 100%;
+  bottom: -7px;
+  left: 0;
 }
 
 .ui-icon-gripsmall-diagonal-se {
-background-position: -64px -224px;
+  background-position: -64px -224px;
 }
 .ui-icon {
-width: 16px;
-height: 16px;
+  width: 16px;
+  height: 16px;
 }
 .ui-resizable-se {
-cursor: se-resize;
-width: 11px;
-height: 11px;
-right: -14px;
-bottom: -14px;
-background: no-repeat url('../Images/rezise.png');
+  cursor: se-resize;
+  width: 11px;
+  height: 11px;
+  right: -14px;
+  bottom: -14px;
+  background: no-repeat url("../Images/rezise.png");
 }
 .ui-resizable-handle {
-position: absolute;
-font-size: 0.1px;
-display: block;
+  position: absolute;
+  font-size: 0.1px;
+  display: block;
 }
 
-#debug
-{
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    background-color: black;
-    color: white;
-    border-radius: 3px;
-    padding: 10px;
+#debug {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background-color: black;
+  color: white;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.screenShake {
+  /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 0.5s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
 }
