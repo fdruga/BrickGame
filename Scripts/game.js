@@ -14,6 +14,9 @@ var pause = false;
 var enemies = [];
 var enemiesTimeFrame = [];
 var gameSpeed = 100;
+var colision = false;
+var colisitonAtFrame = 0;
+var lives = 3;
 
 function Game() {
   enemies = [];
@@ -35,7 +38,6 @@ function Game() {
   }
 
   //this.enemies = new Enemies(lane);
-
   frameInterval = window.setInterval(function () {
     drawFrame(true);
   }, gameSpeed);
@@ -156,12 +158,19 @@ function drawRoadStep(roadStep, line) {
 function keyPressed(e) {
   if (e.keyCode == 37) {
     userCarPosition = "left";
-    updateScreen(false);
+    //updateScreen(false);
     return false;
   }
   if (e.keyCode == 39) {
     userCarPosition = "right";
-    updateScreen(false);
+    //updateScreen(false);
+    return false;
+  }
+  // space key
+  if (e.keyCode == 32) {
+    // Start over the game
+    //this.pause = false;
+    new Game(); // haha, sure
     return false;
   }
 }
@@ -170,6 +179,7 @@ function updateScreen(countFrame) {
   clearScreen();
   $("#roadstep").html("Frame count: " + frameCount);
   $("#carPos").html("Car pos: " + userCarPosition);
+  $("#lives").html("Lives: " + this.lives);
 
   for (var i = 0; i < bits.length; i++) {
     var line = $("<li></li>");
@@ -202,6 +212,12 @@ function collisionDetection() {
   ) {
     $("#colision").html("colision: true");
     pause = true;
+    $("#screenContainer")
+      .addClass("screenShake")
+      .delay(1000)
+      .queue(function () {
+        $(this).removeClass("screenShake").dequeue();
+      });
   }
 }
 

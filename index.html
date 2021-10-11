@@ -1,10 +1,10 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+  <head>
     <title>Brick game</title>
     <script src="Scripts/modernizr-2.6.2.js"></script>
     <script src="Scripts/jquery-1.9.1.js"></script>
-	<script src="Scripts/jquery-ui-1.10.3.custom.js"></script>
+    <script src="Scripts/jquery-ui-1.10.3.custom.js"></script>
     <script src="Scripts/screenSteps.js"></script>
     <script src="Scripts/car.js"></script>
     <script src="Scripts/main.js"></script>
@@ -14,88 +14,265 @@
 
     <link href="Styles/reset-min.css" rel="stylesheet" />
     <link href="Styles/style.css" rel="stylesheet" />
-</head>
-<body>
+  </head>
+  <body>
     <div id="mainContainer">
-        <div id="debug">
-            <p id="roadstep"></p>
-            <p id="colision">Colision: false</p>
-            <p id="carPos">Car pos: </p>
-            <div id="enemyFrames">
-
-            </div>
+      <div id="debug">
+        <p id="roadstep"></p>
+        <p id="colision">Colision: false</p>
+        <p id="carPos">Car pos:</p>
+        <p id="lives">Lives:</p>
+        <div id="enemyFrames"></div>
+      </div>
+      <div id="buttonContainer">
+        <a href="#" id="btnStop"> Stop! </a>
+      </div>
+      <div id="screenContainer">
+        <div id="screen">
+          <ul>
+            <li>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+            <li>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+            <li>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+            <li>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div class="bitActive"></div>
+              <div class="bitActive"></div>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+            <li>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+              <div></div>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+            <li>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+              <div class="bitActive"></div>
+              <div class="bitActive"></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+            <li>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </li>
+            <li>
+              <div class="bitActive"></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div class="bitActive"></div>
+              <div></div>
+              <div class="bitActive"></div>
+              <div></div>
+              <div class="bitActive"></div>
+            </li>
+          </ul>
         </div>
-        <div id="buttonContainer">
-            <a href="#" id="btnStop">
-                Stop!
-            </a>
-        </div>
-        <div id="screenContainer">
-            <div id="screen">
-                <ul>
-                    <li>
-                        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="bitActive"></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="bitActive"></div>
-                    </li>
-                    <li>
-                        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="bitActive"></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="bitActive"></div>
-                    </li>
-                    <li>
-                        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="bitActive"></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="bitActive"></div>
-                    </li>
-                    <li>
-                        <div></div><div></div><div></div><div  class="bitActive"></div><div></div><div></div><div></div><div></div><div></div><div></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div class="bitActive"></div><div class="bitActive"></div><div class="bitActive"></div><div></div><div></div><div></div><div></div><div class="bitActive"></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div></div><div class="bitActive"></div><div></div><div></div><div></div><div></div><div></div><div class="bitActive"></div>
-                    </li>
-                    <li>
-                        <div></div><div></div><div  class="bitActive"></div><div></div><div class="bitActive"></div><div></div><div></div><div></div><div></div><div></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="bitActive"></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div class="bitActive"></div>
-                    </li>
-                    <li>
-                        <div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div></div><div></div><div></div><div></div><div class="bitActive"></div><div></div><div></div><div class="bitActive"></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div></div><div></div><div></div><div class="bitActive"></div><div class="bitActive"></div><div class="bitActive"></div><div></div><div class="bitActive"></div>
-                    </li>
-                    <li>
-                        <div></div><div></div><div></div><div></div><div></div><div></div><div class="bitActive"></div><div></div><div></div><div></div>
-                    </li>
-                    <li>
-                        <div class="bitActive"></div><div></div><div></div><div></div><div></div><div class="bitActive"></div><div></div><div class="bitActive"></div><div></div><div class="bitActive"></div>
-                    </li>
-                </ul>
-            </div>
-        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>
