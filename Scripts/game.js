@@ -37,11 +37,9 @@ function Game() {
     lane = "right";
   }
 
-  //this.enemies = new Enemies(lane);
   frameInterval = window.setInterval(function () {
     drawFrame(true);
   }, gameSpeed);
-  //this.drawFrame();
 
   $("#btnStop").click(function () {
     if (pause) pause = false;
@@ -138,6 +136,7 @@ function addEnemyToCollection(lane) {
     id: 0,
     carLine: 0,
     lane: lane,
+    crashed: false,
   });
 }
 
@@ -204,20 +203,31 @@ function updateScreen(countFrame) {
 function collisionDetection() {
   var carCenter = 3;
   if (userCarPosition === "right") carCenter = 6;
+
+  // Check
+  // 1. The collision
+  // 2. That the enemy car is not in the crashed state
   if (
     bits[17][carCenter] === true ||
     bits[18][carCenter] === true ||
     bits[19][carCenter] === true ||
     (bits[15][carCenter] === true && bits[16][carCenter] === 1)
   ) {
-    $("#colision").html("colision: true");
-    pause = true;
-    $("#screenContainer")
-      .addClass("screenShake")
-      .delay(1000)
-      .queue(function () {
-        $(this).removeClass("screenShake").dequeue();
-      });
+    if (!this.enemies[0].crashed) {
+      //Mark the first car as crashed (oldest in the list actually)
+      this.enemies[0].crashed = true;
+      this.lives--;
+      $("#screenContainer")
+        .addClass("screenShake")
+        .delay(1000)
+        .queue(function () {
+          $(this).removeClass("screenShake").dequeue();
+        });
+
+      if (this.lives === 0) {
+        pause = true;
+      }
+    }
   }
 }
 
