@@ -225,7 +225,7 @@ function collisionDetection() {
         });
 
       if (this.lives === 0) {
-        pasue = true;
+        pause = true;
       }
     }
   }
