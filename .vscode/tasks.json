@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "command": "gulp",
+  "args": ["--no-color"],
+  "tasks": [
+    {
+      "type": "gulp",
+      "task": "TranspileTheLess",
+      "problemMatcher": [],
+      "label": "gulp: default"
+    }
+  ]
+}
