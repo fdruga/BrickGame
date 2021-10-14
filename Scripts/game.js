@@ -16,7 +16,7 @@ var enemiesTimeFrame = [];
 var gameSpeed = 100;
 var colision = false;
 var colisitonAtFrame = 0;
-var lives = 3;
+var lives = 100;
 
 function Game() {
   enemies = [];
@@ -166,12 +166,12 @@ function keyPressed(e) {
     return false;
   }
   // space key
-  if (e.keyCode == 32) {
-    // Start over the game
-    //this.pause = false;
-    new Game(); // haha, sure
-    return false;
-  }
+  // if (e.keyCode == 32) {
+  //   // Start over the game
+  //   //this.pause = false;
+  //   new Game(); // haha, sure
+  //   return false;
+  // }
 }
 
 function updateScreen(countFrame) {

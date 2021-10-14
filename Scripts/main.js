@@ -14,8 +14,30 @@ $(document).ready(function () {
     maxHeight: minHeight,
     minWidth: minWidth,
   });
-  var theGame = new Game();
 });
+
+$(document).ready(function () {
+  $("#startGameBtn").on("click", function () {
+    startGame();
+  });
+
+  $(document).keydown(function (e) {
+    if (e.keyCode == 32) {
+      startGame();
+    }
+  });
+});
+
+function startGame() {
+  // Start the game
+  var theGame = new Game();
+
+  // Hide the Interface
+  $("#landingPageContainer").css("display", "none");
+
+  // Show the game area
+  $("#screen").css("visibility", "visible");
+}
 
 function debug(text) {
   $(debugContainer).append("<p>" + text + "</p>");
