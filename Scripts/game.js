@@ -16,7 +16,7 @@ var enemiesTimeFrame = [];
 var gameSpeed = 100;
 var colision = false;
 var colisitonAtFrame = 0;
-var lives = 100;
+var lives = 1;
 var score = 0;
 
 function Game() {
@@ -232,6 +232,7 @@ function collisionDetection() {
 
       if (this.lives === 0) {
         pause = true;
+        $("#gameScore").html(this.score);
       }
     }
   }

@@ -160,7 +160,7 @@ body {
   }
 }
 
-#landingPageContainer {
+.gameScreenUiContainer {
   display: block;
   background-color: #aab7a7;
   background-image: url("../Images/landingPageBg.png");
@@ -180,6 +180,10 @@ body {
     height: 100%;
     background-color: #cad59b87;
   }
+}
+
+#landingPageContainer {
+  .gameScreenUiContainer();
 
   .buttonsContainer {
     position: absolute;
@@ -189,7 +193,7 @@ body {
 }
 
 #gameOverContainer {
-  display: none;
+  .gameScreenUiContainer();
 }
 
 // #region UI helper classes
@@ -203,6 +207,6 @@ body {
 }
 
 .uiTip {
-  color: #788165;
+  color: #393e2e;
 }
 // #endregion
