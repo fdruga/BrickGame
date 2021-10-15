@@ -17,6 +17,7 @@ var gameSpeed = 100;
 var colision = false;
 var colisitonAtFrame = 0;
 var lives = 100;
+var score = 0;
 
 function Game() {
   enemies = [];
@@ -165,6 +166,7 @@ function keyPressed(e) {
     //updateScreen(false);
     return false;
   }
+
   // space key
   // if (e.keyCode == 32) {
   //   // Start over the game
@@ -179,6 +181,7 @@ function updateScreen(countFrame) {
   $("#roadstep").html("Frame count: " + frameCount);
   $("#carPos").html("Car pos: " + userCarPosition);
   $("#lives").html("Lives: " + this.lives);
+  $("#score").html("Score: " + this.score);
 
   for (var i = 0; i < bits.length; i++) {
     var line = $("<li></li>");
@@ -196,6 +199,9 @@ function updateScreen(countFrame) {
 
   if (countFrame) frameCount++;
   if (frameCount == 20000000) clearInterval(frameInterval);
+  if (frameCount % 15 === 0) {
+    this.score += 10;
+  }
 
   clearMatrix();
 }
