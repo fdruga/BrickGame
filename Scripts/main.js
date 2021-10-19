@@ -3,6 +3,7 @@
 /// <reference path="game.js" />
 
 var debugContainer = null;
+var theGame = null;
 
 $(document).ready(function () {
   debugContainer = $("#debug");
@@ -17,12 +18,13 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  $("#startGameBtn").on("click", function () {
+  $("#startGameBtn, #restartGameBtn").on("click", function () {
     startGame();
   });
 
   $(document).keydown(function (e) {
-    if (e.keyCode == 32) {
+    if (e.keyCode == 13) {
+      // ENTER Key
       startGame();
     }
   });
@@ -30,10 +32,12 @@ $(document).ready(function () {
 
 function startGame() {
   // Start the game
-  var theGame = new Game();
+  theGame = undefined;
+  theGame = new Game();
 
   // Hide the Interface
   $("#landingPageContainer").css("display", "none");
+  $("#gameOverContainer").css("display", "none");
 
   // Show the game area
   $("#screen").css("visibility", "visible");

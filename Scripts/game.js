@@ -19,7 +19,26 @@ var colisitonAtFrame = 0;
 var lives = 1;
 var score = 0;
 
+function resetAllVariables() {
+  bits = new Array();
+  roadStep = 0;
+  screen = null;
+  userCarPosition = null;
+  frameCount = 0;
+  frameInterval = null;
+  pause = false;
+  enemies = [];
+  enemiesTimeFrame = [];
+  gameSpeed = 100;
+  colision = false;
+  colisitonAtFrame = 0;
+  lives = 1;
+  score = 0;
+}
+
 function Game() {
+  resetAllVariables();
+
   enemies = [];
   enemiesTimeFrame = [];
   $(document).keydown(function (e) {
