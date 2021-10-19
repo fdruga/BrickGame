@@ -233,6 +233,12 @@ function collisionDetection() {
       if (this.lives === 0) {
         pause = true;
         $("#gameScore").html(this.score);
+
+        $("#gameOverContainer")
+          .delay(1000)
+          .queue(function () {
+            $(this).css("display", "block").dequeue();
+          });
       }
     }
   }
