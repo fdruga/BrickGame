@@ -46,7 +46,3 @@ function startGame() {
 function debug(text) {
   $(debugContainer).append("<p>" + text + "</p>");
 }
-
-// function isDivideBy(number, a, b) {
-//   return (number % a === 0) ;
-// }

@@ -57,6 +57,7 @@ function Game() {
     lane = "right";
   }
 
+  console.log("Game speed is " + gameSpeed);
   frameInterval = window.setInterval(function () {
     drawFrame(true);
   }, gameSpeed);
@@ -250,17 +251,22 @@ function collisionDetection() {
         });
 
       if (this.lives === 0) {
-        pause = true;
-        $("#gameScore").html(this.score);
-
-        $("#gameOverContainer")
-          .delay(1000)
-          .queue(function () {
-            $(this).css("display", "block").dequeue();
-          });
+        gameIsOver();
       }
     }
   }
+}
+
+function gameIsOver() {
+  clearInterval(frameInterval);
+  pause = true;
+  $("#gameScore").html(this.score);
+
+  $("#gameOverContainer")
+    .delay(1000)
+    .queue(function () {
+      $(this).css("display", "block").dequeue();
+    });
 }
 
 function clearScreen() {
