@@ -68,8 +68,8 @@ function Game() {
     else pause = true;
   });
 
-  // Draw 20 enemies
-  for (var i = 0; i < 20; i++) {
+  // Draw 1000 enemies
+  for (var i = 0; i < 1000; i++) {
     var frame = 0;
     if (enemiesTimeFrame.length == 0) {
       enemiesTimeFrame.push({
@@ -225,6 +225,7 @@ function updateScreen(countFrame) {
     this.score += 10;
   }
   if (frameCount % 300 === 0) {
+    // Game speeds up at every 200 points
     clearInterval(frameInterval);
     this.level += 1;
     gameSpeed = gameSpeed - 10;
