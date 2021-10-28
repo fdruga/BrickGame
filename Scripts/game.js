@@ -18,6 +18,7 @@ var colision = false;
 var colisitonAtFrame = 0;
 var lives = 1;
 var score = 0;
+var level = 0;
 
 function resetAllVariables() {
   bits = new Array();
@@ -34,6 +35,7 @@ function resetAllVariables() {
   colisitonAtFrame = 0;
   lives = 1;
   score = 0;
+  level = 0;
 }
 
 function Game() {
@@ -57,7 +59,6 @@ function Game() {
     lane = "right";
   }
 
-  console.log("Game speed is " + gameSpeed);
   frameInterval = window.setInterval(function () {
     drawFrame(true);
   }, gameSpeed);
@@ -202,6 +203,7 @@ function updateScreen(countFrame) {
   $("#carPos").html("Car pos: " + userCarPosition);
   $("#lives").html("Lives: " + this.lives);
   $("#score").html("Score: " + this.score);
+  $("#level").html("Level: " + this.level);
 
   for (var i = 0; i < bits.length; i++) {
     var line = $("<li></li>");
@@ -221,6 +223,14 @@ function updateScreen(countFrame) {
   if (frameCount == 20000000) clearInterval(frameInterval);
   if (frameCount % 15 === 0) {
     this.score += 10;
+  }
+  if (frameCount % 300 === 0) {
+    clearInterval(frameInterval);
+    this.level += 1;
+    gameSpeed = gameSpeed - 10;
+    frameInterval = window.setInterval(function () {
+      drawFrame(true);
+    }, gameSpeed);
   }
 
   clearMatrix();
@@ -258,10 +268,9 @@ function collisionDetection() {
 }
 
 function gameIsOver() {
-  clearInterval(frameInterval);
   pause = true;
+  clearInterval(frameInterval);
   $("#gameScore").html(this.score);
-
   $("#gameOverContainer")
     .delay(1000)
     .queue(function () {
