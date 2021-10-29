@@ -4,21 +4,24 @@
 /// <reference path="car.js" />
 /// <reference path="opponents.js" />
 
-var bits = new Array();
-var roadStep = 0;
-var screen = null;
-var userCarPosition = null;
-var frameCount = 0;
-var frameInterval = null;
-var pause = false;
-var enemies = [];
-var enemiesTimeFrame = [];
-var gameSpeed = 100;
-var colision = false;
-var colisitonAtFrame = 0;
-var lives = 1;
-var score = 0;
-var level = 0;
+var bits,
+  roadStep,
+  screen,
+  userCarPosition,
+  frameCount,
+  frameInterval,
+  pause,
+  enemies,
+  enemiesTimeFrame,
+  gameSpeed,
+  colision,
+  colisitonAtFrame,
+  lives,
+  score,
+  level,
+  godMode,
+  enemiesPassed,
+  currentEnemiesPassed;
 
 function resetAllVariables() {
   bits = new Array();
@@ -36,6 +39,9 @@ function resetAllVariables() {
   lives = 1;
   score = 0;
   level = 0;
+  godMode = true;
+  enemiesPassed = 1;
+  currentEnemiesPassed = 0;
 }
 
 function Game() {
@@ -135,6 +141,8 @@ function addOpponent() {
   for (var i = 0; i < enemies.length; i++) {
     if (enemies[i].carLine == 23) {
       enemies.splice(i, 1);
+      console.log(enemiesPassed);
+      enemiesPassed++;
     }
   }
 
@@ -204,6 +212,7 @@ function updateScreen(countFrame) {
   $("#lives").html("Lives: " + this.lives);
   $("#score").html("Score: " + this.score);
   $("#level").html("Level: " + this.level);
+  $("#enemiesPassed").html("enemiesPassed: " + enemiesPassed);
 
   for (var i = 0; i < bits.length; i++) {
     var line = $("<li></li>");
@@ -224,11 +233,14 @@ function updateScreen(countFrame) {
   if (frameCount % 15 === 0) {
     this.score += 10;
   }
-  if (frameCount % 300 === 0) {
-    // Game speeds up at every 200 points
-    clearInterval(frameInterval);
+
+  // Game speeds up at every 30 enemies passed
+  if (enemiesPassed % 30 === 0 && currentEnemiesPassed !== enemiesPassed) {
     this.level += 1;
+    currentEnemiesPassed = enemiesPassed;
     gameSpeed = gameSpeed - 10;
+
+    clearInterval(frameInterval);
     frameInterval = window.setInterval(function () {
       drawFrame(true);
     }, gameSpeed);
@@ -261,7 +273,7 @@ function collisionDetection() {
           $(this).removeClass("screenShake").dequeue();
         });
 
-      if (this.lives === 0) {
+      if (this.lives === 0 && !godMode) {
         gameIsOver();
       }
     }
