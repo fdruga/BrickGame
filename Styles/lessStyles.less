@@ -209,6 +209,31 @@ body {
   }
 }
 
+#gameStatusContainer {
+  height: 15px;
+  background-image: url("../Images/bitOff.png");
+  background-repeat: repeat-x;
+  line-height: 15px;
+  font-size: 11px;
+  border: solid 1px #5e665f;
+  border-bottom: none;
+  width: 100%;
+
+  .game-status {
+    &.left-area {
+      float: left;
+      text-align: left;
+      padding-left: 4px;
+    }
+
+    &.right-area {
+      float: right;
+      text-align: right;
+      padding-right: 4px;
+    }
+  }
+}
+
 // #region UI helper classes
 .uiButton {
   font-size: 25px;

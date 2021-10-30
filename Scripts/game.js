@@ -38,7 +38,7 @@ function resetAllVariables() {
   colisitonAtFrame = 0;
   lives = 1;
   score = 0;
-  level = 0;
+  level = 1;
   godMode = true;
   enemiesPassed = 1;
   currentEnemiesPassed = 0;
@@ -213,6 +213,11 @@ function updateScreen(countFrame) {
   $("#score").html("Score: " + this.score);
   $("#level").html("Level: " + this.level);
   $("#enemiesPassed").html("enemiesPassed: " + enemiesPassed);
+
+  // UPDATE GAME STATUS
+  $("#gameStatusLives").html(this.lives);
+  $("#gameStatusLevel").html(this.level);
+  $("#gameStatusScore").html(this.score);
 
   for (var i = 0; i < bits.length; i++) {
     var line = $("<li></li>");

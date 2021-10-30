@@ -11,6 +11,7 @@
     <script src="Scripts/game.js"></script>
     <script src="Scripts/bit.js"></script>
     <script src="Scripts/opponents.js"></script>
+    <script src="resources/fontAwesome/js/all.js"></script>
     <link href="Styles/reset-min.css" rel="stylesheet" />
     <link href="Styles/lessStyles.css" rel="stylesheet" />
   </head>
@@ -29,6 +30,18 @@
         <a href="#" id="btnStop"> Stop! </a>
       </div>
       <div id="screenContainer">
+        <div id="gameStatusContainer">
+          <div class="game-status left-area">
+            <i class="fas fa-heart"></i>
+            <span id="gameStatusLives"></span>
+          </div>
+          <div class="game-status right-area">
+            <span>Speed:</span>
+            <span id="gameStatusLevel"></span>
+            <span>Score:</span>
+            <span id="gameStatusScore"></span>
+          </div>
+        </div>
         <div id="screen">
           <ul>
             <li>
