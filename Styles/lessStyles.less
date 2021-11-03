@@ -234,6 +234,41 @@ body {
   }
 }
 
+.gameTouchControls {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 20;
+  font-size: 70px;
+  color: #676e66;
+
+  // disable zoom on double tap
+  touch-action: manipulation;
+
+  .left,
+  .right {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    border: solid 1px red;
+
+    > svg {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      color: red;
+    }
+  }
+
+  .left {
+    left: 0px;
+  }
+
+  .right {
+    right: 0px;
+  }
+}
+
 // #region UI helper classes
 .uiButton {
   font-size: 25px;

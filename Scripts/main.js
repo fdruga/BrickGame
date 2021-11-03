@@ -4,6 +4,7 @@
 
 var debugContainer = null;
 var theGame = null;
+var autoStart = true;
 
 $(document).ready(function () {
   debugContainer = $("#debug");
@@ -28,6 +29,10 @@ $(document).ready(function () {
       startGame();
     }
   });
+
+  if (autoStart) {
+    startGame();
+  }
 });
 
 function startGame() {

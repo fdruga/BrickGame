@@ -46,7 +46,6 @@ function resetAllVariables() {
 
 function Game() {
   resetAllVariables();
-
   enemies = [];
   enemiesTimeFrame = [];
   $(document).keydown(function (e) {
@@ -56,6 +55,47 @@ function Game() {
   screen = $("#screen");
   clearScreen();
   this.configureInitialBits();
+
+  //#region Event handlers
+  $(".gameTouchControls > .left").bind("touchstart", function () {
+    userCarPosition = "left";
+  });
+  $(".gameTouchControls > .right").bind("touchstart", function () {
+    userCarPosition = "right";
+  });
+
+  $(".gameTouchControls > .left").bind("click", function () {
+    userCarPosition = "left";
+  });
+  $(".gameTouchControls > .right").bind("click", function () {
+    userCarPosition = "right";
+  });
+
+  function keyPressed(e) {
+    if (e.keyCode == 37) {
+      userCarPosition = "left";
+      return false;
+    }
+    if (e.keyCode == 39) {
+      userCarPosition = "right";
+      return false;
+    }
+  }
+  //#endregion
+
+  // $(".gameTouchControls > .left > .arrow")
+  //       .addClass("flash")
+  //       .delay(1000)
+  //       .queue(function () {
+  //         $(this).removeClass("flash").dequeue();
+  //       });
+
+  // $(".gameTouchControls > .left > .arrow")
+  //       .addClass("flash")
+  //       .delay(1000)
+  //       .queue(function () {
+  //         $(this).removeClass("flash").dequeue();
+  //       });
 
   var ran_bool = !!Math.round(Math.random() * 1);
   var lane = "";
@@ -182,27 +222,6 @@ function drawRoad() {
 }
 function drawRoadStep(roadStep, line) {
   bits = getRoadStep(roadStep);
-}
-
-function keyPressed(e) {
-  if (e.keyCode == 37) {
-    userCarPosition = "left";
-    //updateScreen(false);
-    return false;
-  }
-  if (e.keyCode == 39) {
-    userCarPosition = "right";
-    //updateScreen(false);
-    return false;
-  }
-
-  // space key
-  // if (e.keyCode == 32) {
-  //   // Start over the game
-  //   //this.pause = false;
-  //   new Game(); // haha, sure
-  //   return false;
-  // }
 }
 
 function updateScreen(countFrame) {
