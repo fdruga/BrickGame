@@ -13,7 +13,7 @@ body {
   margin: 10px;
   width: 200px;
   height: 350px;
-  margin: 0 auto;
+  margin: 10px auto;
   position: relative;
 }
 #screen {
@@ -51,6 +51,7 @@ body {
 }
 #buttonContainer {
   text-align: center;
+  display: none;
 }
 .ui-resizable-e {
   cursor: e-resize;
@@ -93,12 +94,32 @@ body {
 }
 #debug {
   position: absolute;
+  display: none;
   left: 10px;
   top: 10px;
   background-color: black;
   color: white;
   border-radius: 3px;
   padding: 10px;
+}
+.hidden {
+  display: none;
+}
+.flash {
+  display: block;
+  -webkit-animation: flash linear 1s infinite;
+  animation: flash linear 1s infinite;
+}
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.1;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 .screenShake {
   /* Start the shake animation and make the animation last for 0.5 seconds */
@@ -249,8 +270,9 @@ body {
   width: 100%;
   height: 100%;
   z-index: 20;
-  font-size: 70px;
-  color: #676e66;
+  font-size: 5em;
+  color: #778776;
+  display: none;
   touch-action: manipulation;
 }
 .gameTouchControls .left,
@@ -258,14 +280,16 @@ body {
   position: absolute;
   width: 50%;
   height: 100%;
-  border: solid 1px red;
 }
 .gameTouchControls .left > svg,
 .gameTouchControls .right > svg {
   position: absolute;
-  bottom: 10px;
-  left: 50%;
-  color: red;
+  bottom: 10%;
+  right: 0;
+  left: 0;
+  margin-right: auto;
+  margin-left: auto;
+  filter: drop-shadow(1px 1px 0px #ffffff) drop-shadow(-1px 1px 0px #ffffff) drop-shadow(1px -1px 0px #ffffff) drop-shadow(-1px -1px 0px #ffffff);
 }
 .gameTouchControls .left {
   left: 0px;

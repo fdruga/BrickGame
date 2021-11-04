@@ -83,19 +83,13 @@ function Game() {
   }
   //#endregion
 
-  // $(".gameTouchControls > .left > .arrow")
-  //       .addClass("flash")
-  //       .delay(1000)
-  //       .queue(function () {
-  //         $(this).removeClass("flash").dequeue();
-  //       });
-
-  // $(".gameTouchControls > .left > .arrow")
-  //       .addClass("flash")
-  //       .delay(1000)
-  //       .queue(function () {
-  //         $(this).removeClass("flash").dequeue();
-  //       });
+  $(".gameTouchControls")
+    .addClass("flash")
+    .css("display", "block")
+    .delay(3000)
+    .queue(function () {
+      $(this).removeClass("flash").css("display", "none").dequeue();
+    });
 
   var ran_bool = !!Math.round(Math.random() * 1);
   var lane = "";

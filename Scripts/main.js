@@ -4,7 +4,8 @@
 
 var debugContainer = null;
 var theGame = null;
-var autoStart = true;
+var autoStart = false;
+var debugMode = false;
 
 $(document).ready(function () {
   debugContainer = $("#debug");
@@ -16,6 +17,11 @@ $(document).ready(function () {
     maxHeight: minHeight,
     minWidth: minWidth,
   });
+
+  if (debugMode) {
+    $("#debug").css("display", "block");
+    $("#buttonContainer").css("display", "block");
+  }
 });
 
 $(document).ready(function () {
