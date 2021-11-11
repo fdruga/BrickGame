@@ -33,7 +33,7 @@ function resetAllVariables() {
   pause = false;
   enemies = [];
   enemiesTimeFrame = [];
-  gameSpeed = 200;
+  gameSpeed = 150;
   colision = false;
   colisitonAtFrame = 0;
   lives = 1;

@@ -233,12 +233,13 @@ body {
   }
 }
 
+@statusContainerHeight: 2em;
+
 #gameStatusContainer {
-  height: 15px;
+  height: @statusContainerHeight;
+  line-height: @statusContainerHeight;
   background-image: url("../Images/bitOff.png");
-  background-repeat: repeat-x;
-  line-height: 15px;
-  font-size: 11px;
+  background-repeat: repeat;
   border: solid 1px #5e665f;
   border-bottom: none;
   width: 100%;
