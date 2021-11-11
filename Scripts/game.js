@@ -36,10 +36,10 @@ function resetAllVariables() {
   gameSpeed = 150;
   colision = false;
   colisitonAtFrame = 0;
-  lives = 1;
+  lives = 3;
   score = 0;
   level = 1;
-  godMode = true;
+  godMode = false;
   enemiesPassed = 1;
   currentEnemiesPassed = 0;
 }
@@ -301,6 +301,8 @@ function gameIsOver() {
   pause = true;
   clearInterval(frameInterval);
   $("#gameScore").html(this.score);
+
+  $(".gameTouchControls").css("display", "none");
   $("#gameOverContainer")
     .delay(1000)
     .queue(function () {

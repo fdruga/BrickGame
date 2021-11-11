@@ -4,7 +4,7 @@
 
 var debugContainer = null;
 var theGame = null;
-var autoStart = true;
+var autoStart = false;
 var debugMode = false;
 
 $(document).ready(function () {
@@ -72,6 +72,14 @@ function setMobileStyles() {
   const height = width / 0.55;
   $("#screenContainer").width(width);
   $("#screenContainer").height(height);
+
+  $("#landingPageContainer .uiButton").css("font-size", "100px");
+  $("#landingPageContainer .uiTip").css("display", "none");
+
+  $("#gameOverContainer .uiButton").css("font-size", "100px");
+  $("#gameOverContainer h1").css("font-size", "100px");
+  $("#gameOverContainer p").css("font-size", "75px");
+  $("#gameOverContainer .uiTip").css("display", "none");
 
   $("#gameStatusContainer")
     .css("height", "2em")
