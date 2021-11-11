@@ -33,7 +33,7 @@ function resetAllVariables() {
   pause = false;
   enemies = [];
   enemiesTimeFrame = [];
-  gameSpeed = 100;
+  gameSpeed = 200;
   colision = false;
   colisitonAtFrame = 0;
   lives = 1;
@@ -83,7 +83,8 @@ function Game() {
   }
   //#endregion
 
-  $(".gameTouchControls")
+  $(".gameTouchControls").css("display", "block");
+  $(".gameTouchControls > div > .touchContainer")
     .addClass("flash")
     .css("display", "block")
     .delay(3000)
@@ -149,8 +150,6 @@ function Game() {
     );
     $("#enemyFrames").append("</table>");
   });
-
-  var salut = "asda";
 }
 
 function drawFrame(andRoad) {

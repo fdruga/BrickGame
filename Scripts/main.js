@@ -29,6 +29,10 @@ $(document).ready(function () {
     startGame();
   });
 
+  $("#startGameBtn, #restartGameBtn").bind("touchstart", function () {
+    startGame();
+  });
+
   $(document).keydown(function (e) {
     if (e.keyCode == 13) {
       // ENTER Key
@@ -42,6 +46,7 @@ $(document).ready(function () {
 });
 
 function startGame() {
+  $("#screenContainer").LoadingOverlay("show");
   // Start the game
   theGame = undefined;
   theGame = new Game();
